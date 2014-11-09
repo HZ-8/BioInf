@@ -1,10 +1,10 @@
-import GenerateNumSubPeptides as gsp, GetSpectrumMass as gsm
+import GenerateLinNumSubPeptides as gsp, GetSpectrumMass as gsm
 
-def NumCyclospectrum(numPeptide):
+def NumLinearSpectrum(numPeptide):
     '''numPeptide is an array of aa masses. Return a numeric spectrum - 
     a list of masses of each possible sub peptide'''
     spectr =[0]
-    parts = gsp.GenerateNumSubPeptides(numPeptide)
+    parts = gsp.GenerateLinNumSubPeptides(numPeptide)
     
     for part in parts:
         spectr.append(gsm.GetSpectrumMass(part))

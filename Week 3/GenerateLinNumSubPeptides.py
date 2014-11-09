@@ -1,6 +1,8 @@
 import GetSpectrumMass as gsm
 
 def GenerateLinNumSubPeptides(Peptide):
+    '''Given a numeric peptide, return a list of its subpeptides,
+    BUT WITHOUT cyclic'''
     subpeptides = [0]
     
     for i in range(len(Peptide)):
