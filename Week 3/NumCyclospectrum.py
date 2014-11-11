@@ -1,4 +1,6 @@
-import GenerateNumSubPeptides as gsp, GetSpectrumMass as gsm
+#delete this file! GenerateNumSubPeptides generates cuclospectrum!!!
+
+import GenerateNumSubPeptides as gsp, GetNumPeptideMass as gm
 
 def NumCyclospectrum(numPeptide):
     '''numPeptide is an array of aa masses. Return a numeric spectrum - 
@@ -7,7 +9,7 @@ def NumCyclospectrum(numPeptide):
     parts = gsp.GenerateNumSubPeptides(numPeptide)
     
     for part in parts:
-        spectr.append(gsm.GetSpectrumMass(part))
+        spectr.append(gm.GetNumPeptideMass(part))
     
     spectr.sort()
     

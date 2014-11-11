@@ -2,7 +2,8 @@ import LinearScore as ls, LetterPeptideToNum as ltn
 
 def Trim(Leaderboard, Spectrum, N, MassDict):
     '''In a list of peptides Leaderboard, take only N (with ties) of 
-    top-rating ones in scope of matching Spectrum'''
+    top-rating ones in scope of matching Spectrum
+    massDict is 20-elem size'''
     LinearScores = []
     
     for j in range(len(Leaderboard)):
