@@ -11,10 +11,9 @@ def LeaderboardCycloPeptideSequencing(Spectrum, N, dict_18):
     pmass = max(Spectrum)
     spec_len = 1
     
-    while (len(Leaderboard) > 0) and (spec_len <= len(Spectrum)):
+    while (len(Leaderboard) > 0) and (spec_len < len(Spectrum)):
         Leaderboard = exp.Expand(Leaderboard, dict_18)
-        spec_len = len(Leaderboard) * (len(Leaderboard) - 1) + 1
-        print Leaderboard[1]
+        spec_len = len(Leaderboard[0]) * (len(Leaderboard[0]) - 1) + 1
 
         for Peptide in Leaderboard:
             if gm.GetNumPeptideMass(Peptide) == pmass:
@@ -25,12 +24,6 @@ def LeaderboardCycloPeptideSequencing(Spectrum, N, dict_18):
                     Leaderboard.remove(Peptide)
             elif gm.GetNumPeptideMass(Peptide) > pmass:
                 Leaderboard.remove(Peptide)
-            '''else:
-                line_sp = gln.GenerateLinNumSubPeptides(Peptide)
-                if  (line_sp, Spectrum):'''
-        
-        print len(Leaderboard)
-        print LeaderPeptide
             
         Leaderboard = nt.NumTrim(Leaderboard, Spectrum, N)
         

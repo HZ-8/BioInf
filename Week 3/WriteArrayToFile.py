@@ -3,5 +3,5 @@ def WriteArrayToFile (array, filename = 'result.txt'):
     f = open(filename, 'w')
     for i in range(len(array)):
         f.write(str(array[i]))
-        f.write(', ')
+        f.write('-')
     f.close()
