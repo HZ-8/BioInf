@@ -4,7 +4,11 @@ def ReadTextPattern (filename):
     f = open(filename, 'r')
     Pattern= f.readline()
     #k = f.readline()
-    #dist = f.readline()   
+    #dist = f.readline() 
     f.close()
-    return Pattern.strip()
-    #return Text.strip()
+    Pattern.strip()
+    array = Pattern.split()
+    
+    array = map(int, array)
+    
+    return array
