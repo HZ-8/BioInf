@@ -3,8 +3,7 @@ NumTrim as nt
 
 def LeaderboardCycloPeptideSequencing(Spectrum, N, dict_18):
     '''With a given experimental spectrum, find any winning peptide that has
-    closest match with spectrum; N is maximal allowed mismatches;
-    mass_dictionary is 20-elem dict'''
+    closest match with spectrum; N is maximal allowed mismatches'''
     
     Leaderboard = [0]
     LeaderPeptide = [0]
