@@ -1,15 +1,15 @@
-def Expand(numPeptides, mass_dictionary):
+def Expand(numPeptides, AminoMassesList):
     '''Take a list of numeric peptides, and return expanded list (added one 
-    mass from dictionary to the end of each peptide, getting 18x records)'''
+    mass from list to the end of each peptide)'''
     exp_peptides = []
     
     if numPeptides == [0]:
-        for key in mass_dictionary:
-            exp_peptides.append([mass_dictionary[key]])
+        for mass in AminoMassesList:
+            exp_peptides.append(mass)
         return exp_peptides
     
     for pept in numPeptides:
-        for key in mass_dictionary:
-            exp_peptides.append(pept + [mass_dictionary[key]])
+        for mass in AminoMassesList:
+            exp_peptides.append(pept + [mass])
     return exp_peptides
     

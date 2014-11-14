@@ -1,7 +1,7 @@
 import Expand as exp, GetNumPeptideMass as gm, NumCyclopeptideScore as csc, \
 NumTrim as nt
 
-def LeaderboardCycloPeptideSequencing(Spectrum, N, dict_18):
+def LeaderboardCycloPeptideSequencing(Spectrum, N, AminoMassesList):
     '''With a given experimental spectrum, find any winning peptide that has
     closest match with spectrum; N is maximal allowed mismatches'''
     
@@ -11,7 +11,7 @@ def LeaderboardCycloPeptideSequencing(Spectrum, N, dict_18):
     spec_len = 1
     
     while (len(Leaderboard) > 0) and (spec_len < len(Spectrum)):
-        Leaderboard = exp.Expand(Leaderboard, dict_18)
+        Leaderboard = exp.Expand(Leaderboard, AminoMassesList)
         spec_len = len(Leaderboard[0]) * (len(Leaderboard[0]) - 1) + 1
 
         for Peptide in Leaderboard:

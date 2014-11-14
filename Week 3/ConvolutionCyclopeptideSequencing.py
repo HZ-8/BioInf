@@ -1,5 +1,5 @@
 import SpectralConvolution as sc, FrequentElements as fel, \
-LeaderboardCycloPeptideSequencing al ls
+       LeaderboardCycloPeptideSequencing as ls
 
 def ConvolutionCyclopeptideSequencing(M, N, Spectrum):
     convol = sc.SpectralConvolution(Spectrum)
@@ -12,8 +12,6 @@ def ConvolutionCyclopeptideSequencing(M, N, Spectrum):
     new_convol = convol[pos:]
     FreqAminoList = fel.FrequentElement(new_convol, M)
     
+    LeaderPeptide = ls.LeaderboardCycloPeptideSequencing(Spectrum, N, FreqAminoList)
     
-    return new_convol
-                
-                
-        
+    return LeaderPeptide
