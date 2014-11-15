@@ -5,7 +5,7 @@ def Expand(numPeptides, AminoMassesList):
     
     if numPeptides == [0]:
         for mass in AminoMassesList:
-            exp_peptides.append(mass)
+            exp_peptides.append([mass])
         return exp_peptides
     
     for pept in numPeptides:

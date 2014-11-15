@@ -1,15 +1,15 @@
-import GenerateLinTheoreticalSpectrum as gts
+import NumLinearSpectrum as ls
 
 def LinearScore(numPeptide, Spectrum):
     '''Check how many valid positions exist in Spectrum for a theoretical
     linear spectrum of numeric Peptide'''
-    theor_spec = gts.GenerateLinTheoreticalSpectrum(numPeptide)
-    tsp1 = theor_spec + []
-    tsp2 = Spectrum + []
+    
+    theor_spec = ls.NumLinearSpectrum(numPeptide)
 
+    tsp2 = Spectrum + []
     count = 0
 
-    for el in tsp1:
+    for el in theor_spec:
         if el in tsp2:
             tsp2.remove(el)
             count +=1

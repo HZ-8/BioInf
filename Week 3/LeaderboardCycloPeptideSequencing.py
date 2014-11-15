@@ -1,30 +1,33 @@
-import Expand as exp, GetNumPeptideMass as gm, NumCyclopeptideScore as csc, \
-NumTrim as nt
+import Expand as exp, NumCyclopeptideScore as csc, NumTrim as nt
 
 def LeaderboardCycloPeptideSequencing(Spectrum, N, AminoMassesList):
     '''With a given experimental spectrum, find any winning peptide that has
-    closest match with spectrum; N is maximal allowed mismatches'''
+    closest match with spectrum; N is maximal allowed mismatches between
+    spectrums'''
     
     Leaderboard = [0]
     LeaderPeptide = [0]
     pmass = max(Spectrum)
-    spec_len = 1
+    lead_score = csc.NumCyclopeptideScore(LeaderPeptide, Spectrum)
     
-    while (len(Leaderboard) > 0) and (spec_len < len(Spectrum)):
+    while (len(Leaderboard) > 0):
         Leaderboard = exp.Expand(Leaderboard, AminoMassesList)
-        spec_len = len(Leaderboard[0]) * (len(Leaderboard[0]) - 1) + 1
-
+        work_board = Leaderboard + []
+        
         for Peptide in Leaderboard:
-            if gm.GetNumPeptideMass(Peptide) == pmass:
+            sump = sum(Peptide)
+
+            if sump == pmass:
                 pept_score = csc.NumCyclopeptideScore(Peptide, Spectrum)
-                lead_score = csc.NumCyclopeptideScore(LeaderPeptide, Spectrum)
                 if pept_score > lead_score:
                     LeaderPeptide = Peptide + []
-                    Leaderboard.remove(Peptide)
-            elif gm.GetNumPeptideMass(Peptide) > pmass:
-                Leaderboard.remove(Peptide)
-            
-        Leaderboard = nt.NumTrim(Leaderboard, Spectrum, N)
-        
- 
+                    lead_score = pept_score
+
+                work_board.remove(Peptide)
+            else:
+                if sump > pmass:
+                    work_board.remove(Peptide)
+       
+        Leaderboard = nt.NumTrim(work_board, Spectrum, N)
+
     return LeaderPeptide

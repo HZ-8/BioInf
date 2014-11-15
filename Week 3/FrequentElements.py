@@ -17,19 +17,16 @@ def FrequentElement(Array, M):
     '''Return M most frequest elements of array, with ties'''
     
     freq = Frequencies(Array)
-    freq = sorted(freq.items(), reverse = True)
-    
+    freq = sorted(freq.items(), key=lambda x: x[1], reverse = True)
+
     exper_masses = []
-    count = 0
-    prev_elem = ''
-    for elem_pair in freq:
-        if count >= M:
-            break
-    
-        exper_masses.append(elem_pair[0])
-        if elem_pair[0] == prev_elem:
-            prev_elem = elem_pair[0]
-        else: 
-            count += 1           
+
+    for i in range(M):
+        exper_masses.append(freq[i][0])
+        
+    i = M
+    while (i < len(freq)) and (freq[i][1] == freq[i-1][1]):
+        exper_masses.append(freq[i][0])
+        i += 1
 
     return exper_masses
