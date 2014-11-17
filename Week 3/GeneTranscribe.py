@@ -1,4 +1,5 @@
 def GeneTranscribe(Text):
+    '''For gene Text, return its RNA'''
     rna = ''
     for letter in Text:
         if letter == 'T':

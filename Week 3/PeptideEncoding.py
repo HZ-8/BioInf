@@ -1,5 +1,5 @@
 import PeptidePositions, GeneTranscribe, ReverseComplementPattern as rev,\
- GeneProteins as gp
+ RNATranslation as rt
 
 def PeptideEncoding(Text, Peptide, GeneticCode):
     '''Given gene string Text, find all its substings which encode for 
@@ -9,7 +9,7 @@ def PeptideEncoding(Text, Peptide, GeneticCode):
     rna = GeneTranscribe.GeneTranscribe(Text)
     for i in range(3):
         frame = rna[i:]
-        proteins = gp.GeneProteins(frame, GeneticCode)
+        proteins = rt.RNATranslation(frame, GeneticCode)
         
         pos_in_text = i
         for protein in proteins:
@@ -24,7 +24,7 @@ def PeptideEncoding(Text, Peptide, GeneticCode):
     rna = GeneTranscribe.GeneTranscribe(compl)
     for i in range(3):
         frame = rna[i:]
-        proteins = gp.GeneProteins(frame, GeneticCode)
+        proteins = rt.RNATranslation(frame, GeneticCode)
        
         pos_in_text = i
         for protein in proteins:

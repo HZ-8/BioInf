@@ -1,4 +1,4 @@
-import Expand as exp, NumCyclopeptideScore as csc, NumTrim as nt
+import Expand as exp, CyclopeptideScore as cs, Trim
 
 def LeaderboardCycloPeptideSequencing(Spectrum, N, AminoMassesList):
     '''With a given experimental spectrum, find any winning peptide that has
@@ -8,7 +8,7 @@ def LeaderboardCycloPeptideSequencing(Spectrum, N, AminoMassesList):
     Leaderboard = [0]
     LeaderPeptide = [0]
     pmass = max(Spectrum)
-    lead_score = csc.NumCyclopeptideScore(LeaderPeptide, Spectrum)
+    lead_score = cs.NumCyclopeptideScore(LeaderPeptide, Spectrum)
     
     while (len(Leaderboard) > 0):
         Leaderboard = exp.Expand(Leaderboard, AminoMassesList)
@@ -18,7 +18,7 @@ def LeaderboardCycloPeptideSequencing(Spectrum, N, AminoMassesList):
             sump = sum(Peptide)
 
             if sump == pmass:
-                pept_score = csc.NumCyclopeptideScore(Peptide, Spectrum)
+                pept_score = cs.NumCyclopeptideScore(Peptide, Spectrum)
                 if pept_score > lead_score:
                     LeaderPeptide = Peptide + []
                     lead_score = pept_score
@@ -28,6 +28,6 @@ def LeaderboardCycloPeptideSequencing(Spectrum, N, AminoMassesList):
                 if sump > pmass:
                     work_board.remove(Peptide)
        
-        Leaderboard = nt.NumTrim(work_board, Spectrum, N)
+        Leaderboard = Trim.NumTrim(work_board, Spectrum, N)
 
     return LeaderPeptide

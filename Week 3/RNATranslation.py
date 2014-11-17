@@ -1,5 +1,5 @@
-def GeneProteins(RNA, GenCode):
-    '''Taking whole gene RNA, return all peptides separated with stop codons'''
+def RNATranslation(RNA, GenCode):
+    '''Taking whole RNA, return all peptides separated with stop codons'''
     Peptides = []
     peptide = ''
     
