@@ -12,6 +12,7 @@ def ImmediateNeighbors(Pattern):
     return neibhood
 
 def Neighbors(Pattern, d):
+    '''Return all possible paterns at d distance from the given one'''
     if d == 0:
         return [Pattern]
     if len(Pattern) == 1:
@@ -30,6 +31,7 @@ def Neighbors(Pattern, d):
     return neibhood   
     
 def ExNeighbors(Pattern, d, rem):
+    '''Not completed. Return all patterns at exact distance d'''
     if d == 0:
         return {Pattern}
     if len(Pattern) == 1:
