@@ -1,11 +1,10 @@
-import ReadTextPattern, MotifEnumeration, WriteArrayToFile
+import ReadTextPattern, ProfileMostProbableKMer
 
-k, d, dna = ReadTextPattern.ReadTextPattern('dataset_156_7.txt')
+Text, k, profile = ReadTextPattern.ReadTextPattern('dataset_159_3.txt')
 k = int(k)
-d = int(d)
 
 #print k, d, dna
 
-motifs = MotifEnumeration.MotifEnumeration(dna, k, d)
+pat = ProfileMostProbableKMer.ProfileMostProbableKMer(Text, k, profile)
 
-WriteArrayToFile.WriteArrayToFile(motifs, 'result.txt')
+print pat
