@@ -1,4 +1,6 @@
 from ProfileMostProbableKMer import ProfileMostProbableKMer
+from CreateNumProfile import CreateNumProfile
+from Score import Score
 
 def GreedyMotifSearch(DNA, k, t):
     BestMotifs = []
@@ -6,14 +8,12 @@ def GreedyMotifSearch(DNA, k, t):
         BestMotifs.append(string[:k])
     
     for i in range(len(DNA[0])-k+1):
-        Motifs = []
-        Motifs[0] = DNA[0][i:i+k]
+        Motifs = [DNA[0][i:i+k]]
         
-        for j in range(2,t):
-            Profile = []
-            for l in range(j):
-                Profile[l] = Motifs[l]
-            Motifs[j] = ProfileMostProbableKMer(DNA[j], k, Profile)
+        for j in range(1,t):
+            Profile = CreateNumProfile(Motifs)
+        
+            Motifs.append(ProfileMostProbableKMer(DNA[j], k, Profile))
         
         if Score(Motifs) < Score(BestMotifs):
             BestMotifs = Motifs

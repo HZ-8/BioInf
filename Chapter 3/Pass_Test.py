@@ -1,13 +1,9 @@
-import ReadTextPattern, ProfileMostProbableKMer
+import ReadTextPattern, GreedyMotifSearch, WriteArrayToFile
 
-Text, k, profile = ReadTextPattern.ReadTextPattern('dataset_159_3.txt')
+k, t, dna = ReadTextPattern.ReadTextPattern('dataset_159_5.txt')
 
 k = int(k)
+t = int(t)
 
-median = DistanceBetweenPatternAndStrings.MedianString(dna, k)
-
-print median
-
-pat = ProfileMostProbableKMer.ProfileMostProbableKMer(Text, k, profile)
-
-print pat
+result = GreedyMotifSearch.GreedyMotifSearch(dna, k, t)
+WriteArrayToFile.WriteArrayToFile(result)

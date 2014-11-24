@@ -1,6 +1,6 @@
 def ProfileMostProbableKMer(Text, k, profile):
     max_probab = 0
-    best_pat = ''
+    best_pat = Text[:k]
     for i in range(len(Text)-k+1):
         pattern = Text[i:i+k]
         pat_probab = 1
