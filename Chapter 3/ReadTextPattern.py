@@ -1,5 +1,6 @@
 def ReadTextPattern (filename):
     f = open(filename, 'r')
+
     Text = f.readline()
     Text = Text.strip()
     k = f.readline()
@@ -19,4 +20,5 @@ def ReadTextPattern (filename):
     profile['T'] = map(float, prof_row.split()) 
     
     return Text, k, profile
+
     #return Text.strip()
