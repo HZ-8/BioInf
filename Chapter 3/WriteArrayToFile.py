@@ -1,4 +1,4 @@
-def WriteArrayToFile (array, filename = 'result.txt'):
+def WriteArrayToFile (array, score, filename = 'result.txt'):
     ''' This procedure takes a name of a file and writes to it an array of data'''
     f = open(filename, 'w')
     #array = map(str, array)
@@ -8,6 +8,7 @@ def WriteArrayToFile (array, filename = 'result.txt'):
         f.write(el)
         f.write('\n')
 
+    f.write(str(score))
     f.close()
     
     return
