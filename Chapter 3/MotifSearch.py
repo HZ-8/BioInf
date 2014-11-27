@@ -39,3 +39,31 @@ def RandomizedMotifSearch(DNA, k, t):
             BestMotifs = Motifs
         else:
             return BestMotifs, Score(BestMotifs)
+        
+def GibbsSampler(DNA, k, t, N):
+    Motifs = []
+    for string in DNA:
+        index = randrange(len(string)-k+1)
+        Motifs.append(string[index:index+k])    
+
+    BestMotifs = Motifs
+    for j in range(N):
+        temp_motifs = Motifs + []
+        i = randrange(t)
+        temp_motifs.remove(temp_motifs[i])
+        Profile = CreateNumProfile(temp_motifs, 1)
+        
+    
+
+GIBBSSAMPLER(Dna, k, t, N)
+        randomly select k-mers Motifs = (Motif1, …, Motift) in each string
+            from Dna
+        BestMotifs ← Motifs
+        for j ← 1 to N
+            i ← Random(t)
+            Profile ← profile matrix constructed from all strings in Motifs
+                       except for Motifi
+            Motifi ← Profile-randomly generated k-mer in the i-th sequence
+            if Score(Motifs) < Score(BestMotifs)
+                BestMotifs ← Motifs
+        return BestMotifs
