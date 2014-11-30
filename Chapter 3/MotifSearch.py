@@ -1,4 +1,5 @@
-from ProfileMostProbableKMer import ProfileMostProbableKMer
+from MostProbableKMer import ProfileMostProbableKMer,\
+                             ProfileRandomlyGeneratedKMer
 from CreateNumProfile import CreateNumProfile
 from Score import Score
 from random import randrange
@@ -52,18 +53,8 @@ def GibbsSampler(DNA, k, t, N):
         i = randrange(t)
         temp_motifs.remove(temp_motifs[i])
         Profile = CreateNumProfile(temp_motifs, 1)
+        Motifs[i] = ProfileRandomlyGeneratedKMer(DNA[i], k, Profile)
         
-    
-
-GIBBSSAMPLER(Dna, k, t, N)
-        randomly select k-mers Motifs = (Motif1, …, Motift) in each string
-            from Dna
-        BestMotifs ← Motifs
-        for j ← 1 to N
-            i ← Random(t)
-            Profile ← profile matrix constructed from all strings in Motifs
-                       except for Motifi
-            Motifi ← Profile-randomly generated k-mer in the i-th sequence
-            if Score(Motifs) < Score(BestMotifs)
-                BestMotifs ← Motifs
-        return BestMotifs
+        if Score(Motifs) < Score(BestMotifs):
+            BestMotifs = Motifs + []
+    return BestMotifs, Score(BestMotifs)
