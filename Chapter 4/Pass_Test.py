@@ -1,8 +1,8 @@
 import ReadTextPattern, WriteArrayToFile, StringComposition
 
-k, Text = ReadTextPattern.ReadTextPattern('dataset_197_3.txt')
+pat = ReadTextPattern.ReadTextPattern('dataset_198_9.txt')
 
-k = int(k)
-result = StringComposition.StringComposition(Text, k)
-
+#k = int(k)
+result = StringComposition.OverlapGraph(pat)
+#print result
 WriteArrayToFile.WriteArrayToFile(result)

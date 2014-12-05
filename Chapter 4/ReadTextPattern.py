@@ -1,14 +1,15 @@
 def ReadTextPattern (filename):
     f = open(filename, 'r')
 
-    k = f.readline().strip()
-    Text = f.readline().strip()
-    '''k, t, N = Text.split()
-    dna = []
+    #k = f.readline().strip()
+    #Text = f.readline().strip()
+    
+    #k, t, N = Text.split()
+    array = []
     for line in f:
-        dna.append(line.strip())
+        array.append(line.strip())
 
-    profile = {}
+    '''profile = {}
     prof_row = f.readline().strip()
     profile['A'] = map(float, prof_row.split())
     
@@ -21,4 +22,4 @@ def ReadTextPattern (filename):
     prof_row = f.readline().strip()
     profile['T'] = map(float, prof_row.split()) '''
     
-    return k, Text
+    return array
