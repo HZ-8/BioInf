@@ -1,11 +1,16 @@
 import ReadTextPattern, WriteArrayToFile, StringComposition
 
-pat = ReadTextPattern.ReadTextPattern('dataset_198_9.txt')
+Patterns = ReadTextPattern.ReadTextPattern('dataset_200_7.txt')
 
 #k = int(k)
-result = StringComposition.OverlapGraph(pat)
-#print result
-WriteArrayToFile.WriteArrayToFile(result)
+graph = StringComposition.DeBruijnFromPatterns(Patterns)
+
+'''sorted_graph = {}
+keys2 = graph.keys()
+keys2.sort()
+for el in keys2: sorted_graph[el] = graph[el]'''
+print graph
+WriteArrayToFile.WriteArrayToFile(graph)
 
 '''bin4 = lambda x : ''.join(reversed( [str((x >> i) & 1) for i in range(4)]))
 bin19 = lambda x : ''.join(reversed( [str((x >> i) & 1) for i in range(19)]))

@@ -1,10 +1,10 @@
 def ReadTextPattern (filename):
     f = open(filename, 'r')
 
-    #k = f.readline().strip()
-    #Text = f.readline().strip()
+    '''k = f.readline().strip()
+    Text = f.readline().strip()
     
-    #k, t, N = Text.split()
+    k, t, N = Text.split()'''
     array = []
     for line in f:
         array.append(line.strip())
