@@ -5,9 +5,15 @@ def ReadTextPattern (filename):
     Text = f.readline().strip()
     
     k, t, N = Text.split()'''
-    array = []
+    array = {}
     for line in f:
-        array.append(line.strip())
+        line_el = line.strip().split()
+        key = int(line_el[0])
+        s_values = line_el[2].split(',')
+        values = []
+        for el in s_values:
+           values.append(int(el))
+        array[key] = values
 
     '''profile = {}
     prof_row = f.readline().strip()

@@ -1,16 +1,16 @@
-import ReadTextPattern, WriteArrayToFile, StringComposition
+import ReadTextPattern, WriteArrayToFile, ReconstructString
 
-Patterns = ReadTextPattern.ReadTextPattern('dataset_200_7.txt')
+AdjList = ReadTextPattern.ReadTextPattern('dataset_203_2 (1).txt')
 
 #k = int(k)
-graph = StringComposition.DeBruijnFromPatterns(Patterns)
+path = ReconstructString.EulerianCycle(AdjList)
 
 '''sorted_graph = {}
 keys2 = graph.keys()
 keys2.sort()
 for el in keys2: sorted_graph[el] = graph[el]'''
-print graph
-WriteArrayToFile.WriteArrayToFile(graph)
+#print path
+WriteArrayToFile.WriteArrayToFile(path)
 
 '''bin4 = lambda x : ''.join(reversed( [str((x >> i) & 1) for i in range(4)]))
 bin19 = lambda x : ''.join(reversed( [str((x >> i) & 1) for i in range(19)]))

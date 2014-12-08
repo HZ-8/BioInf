@@ -4,11 +4,10 @@ def WriteArrayToFile (array, filename = 'result.txt'):
     #array = map(str, array)
     '''s = ' '.join(array)
     f.write(s)'''
-    for el in array:
-        f.write(el[0] + ' -> ' + el[1][0])
-        for i in range(1, len(el[1])):
-            f.write(', ' + el[1][i])
-        f.write('\n')
+    f.write(str(array[0]))
+    for i in range(1, len(array)):
+        f.write('->' + str(array[i]))
+        #f.write('\n')
 
     f.close()
     
