@@ -30,3 +30,56 @@ def EulerianCycle(AdjList):
             node = new_node + 0
 
     return eustr
+
+def EulerianPath(AdjList):
+    '''Make up Euler path in graph'''
+    
+    #Find Start and End nodes of the path
+    nodes = {}
+    for key in AdjList:
+        for value in AdjList[key]:
+            if value in nodes:
+                nodes[value] += 1
+            else:
+                nodes[value] = 1
+            if key in nodes:
+                nodes[key] -= 1
+            else:
+                nodes[key] = -1
+
+    for key in nodes:
+        if nodes[key] == 1:
+            end_node = key
+        if nodes[key] == -1:
+            start_node = key
+    
+    #Add an edge from out to in node
+    if end_node in AdjList:
+        AdjList[end_node].append(start_node)
+    else:
+        AdjList[end_node] = [start_node]
+    
+    #Find Eulerian Cycle in new AdjList
+    cycle = EulerianCycle(AdjList)
+    
+    #Rearrange the cycle to start in start_node and end in end_node
+    i = 0
+    found = False
+    while not found:
+        pos = cycle.index(end_node, i)
+        if pos == len(cycle):
+            j = 0
+        else:
+            j = pos + 1
+        if cycle[j] == start_node:
+            found = True
+        else:
+            i = pos + 1
+    
+    eu_path = []
+    for i in range(j, len(cycle)-1):
+        eu_path.append(cycle[i])
+    for i in range(0, j):
+        eu_path.append(cycle[i])
+    
+    return eu_path
