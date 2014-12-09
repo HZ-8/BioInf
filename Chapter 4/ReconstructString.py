@@ -1,4 +1,5 @@
 from StringComposition import DeBruijnFromPatterns
+from BinaryMethods import KBinarySet
 
 def EulerianCycle(AdjList):
     '''Make up an Eulerian graph from the adjacency list'''
@@ -94,3 +95,12 @@ def StringReconstruction(Patterns):
     genome = EulerianPath(AdjList)
     
     return genome
+
+def KUniversalCircularString(k):
+    '''From k, create any binary k-universal string'''
+    patterns = KBinarySet(k)
+    AdjList = DeBruijnFromPatterns(patterns)
+    k_univ_str = EulerianCycle(AdjList)
+    k_univ_str = k_univ_str[:-k+1]
+    
+    return k_univ_str
