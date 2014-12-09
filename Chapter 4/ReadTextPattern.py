@@ -5,7 +5,7 @@ def ReadTextPattern (filename):
     Text = f.readline().strip()
     
     k, t, N = Text.split()'''
-    array = {}
+    '''array = {}
     for line in f:
         line_el = line.strip().split()
         key = int(line_el[0])
@@ -13,8 +13,13 @@ def ReadTextPattern (filename):
         values = []
         for el in s_values:
            values.append(int(el))
-        array[key] = values
-
+        array[key] = values'''
+    
+    array = []
+    for line in f:
+        line_el = line.strip()
+        array.append(line_el)
+        
     '''profile = {}
     prof_row = f.readline().strip()
     profile['A'] = map(float, prof_row.split())
@@ -27,5 +32,6 @@ def ReadTextPattern (filename):
 
     prof_row = f.readline().strip()
     profile['T'] = map(float, prof_row.split()) '''
+    f.close()    
     
     return array

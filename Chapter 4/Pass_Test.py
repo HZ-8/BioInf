@@ -1,8 +1,8 @@
 import ReadTextPattern, WriteArrayToFile, ReconstructString
 
-AdjList = ReadTextPattern.ReadTextPattern('dataset_203_5.txt')
+Patterns = ReadTextPattern.ReadTextPattern('dataset_203_6.txt')
 #k = int(k)
-path = ReconstructString.EulerianPath(AdjList)
+path = ReconstructString.StringReconstruction(Patterns)
 
 '''sorted_graph = {}
 keys2 = graph.keys()

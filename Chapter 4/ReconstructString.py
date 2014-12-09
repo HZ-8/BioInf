@@ -1,3 +1,5 @@
+from StringComposition import DeBruijnFromPatterns
+
 def EulerianCycle(AdjList):
     '''Make up an Eulerian graph from the adjacency list'''
     
@@ -8,7 +10,7 @@ def EulerianCycle(AdjList):
         #in current path, define a node with unused exits
         for iter_node in eustr:
             if iter_node in AdjList:
-                node = iter_node + 0
+                node = iter_node * 1
                 break
        
        #reform the path to start and end in the node with an exit
@@ -23,11 +25,11 @@ def EulerianCycle(AdjList):
         #starting in the last node, exit it and continue walking the graph
         while node in AdjList:
             eustr.append(AdjList[node][0])
-            new_node = AdjList[node][0] + 0
+            new_node = AdjList[node][0] * 1
             AdjList[node].remove(AdjList[node][0])
             if AdjList[node] == []:
                 del AdjList[node]
-            node = new_node + 0
+            node = new_node * 1
 
     return eustr
 
@@ -53,7 +55,7 @@ def EulerianPath(AdjList):
         if nodes[key] == -1:
             start_node = key
     
-    #Add an edge from out to in node
+    #Add an edge from end to start node
     if end_node in AdjList:
         AdjList[end_node].append(start_node)
     else:
@@ -83,3 +85,12 @@ def EulerianPath(AdjList):
         eu_path.append(cycle[i])
     
     return eu_path
+    
+def StringReconstruction(Patterns):
+    '''Given an integer k and a list of k-mers Patterns,
+    reconstruct the genome (one of possible)'''
+    
+    AdjList = DeBruijnFromPatterns(Patterns)
+    genome = EulerianPath(AdjList)
+    
+    return genome

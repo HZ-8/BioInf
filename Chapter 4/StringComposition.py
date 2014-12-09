@@ -49,11 +49,11 @@ def DeBruijn(k, Text):
         else:
             graph[key] = [Text[i+1:i+1+k]]
     
-    result = []
+    '''result = []
     for el in graph:
         result.append([el, graph[el]])
-    result.sort()
-    return result   
+    result.sort()'''
+    return graph   
 
 def DeBruijnFromPatterns(Patterns):
     '''Glue repeated overlapping nodes of the adjacency graph'''
@@ -67,9 +67,9 @@ def DeBruijnFromPatterns(Patterns):
         else:
             graph[pref] = [suff]
     
-    result = []
+    '''result = []
     for el in graph:
         result.append([el, graph[el]])
-    result.sort()
-    return result    
+    result.sort()'''
+    return graph    
     
