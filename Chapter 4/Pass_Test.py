@@ -1,16 +1,17 @@
-import ReadTextPattern, WriteArrayToFile, ReconstructString
+#import ReadTextPattern, WriteArrayToFile, ReconstructString
 
-#Patterns = ReadTextPattern.ReadTextPattern('dataset_203_6.txt')
+#Patterns = ReadTextPattern.ReadTextPattern('Test_data.txt')
 #k = int(k)
-k = 8
-path = ReconstructString.KUniversalCircularString(k)
+#k = 8
+#path = ReconstructString.KUniversalCircularString(k)
+#path = ReconstructString.StringReconstruction(Patterns)
 
 '''sorted_graph = {}
 keys2 = graph.keys()
 keys2.sort()
 for el in keys2: sorted_graph[el] = graph[el]'''
 #print path
-WriteArrayToFile.WriteArrayToFile(path)
+#WriteArrayToFile.WriteArrayToFile(path)
 
 '''bin3 = lambda x : ''.join(reversed( [str((x >> i) & 1) for i in range(3)]))
 bin8 = lambda x : ''.join(reversed( [str((x >> i) & 1) for i in range(8)]))
@@ -21,21 +22,38 @@ for i in range(2 ** 3):
     dic.append(s)
 
 dic.sort()
-print dic 
+print dic '''
 
 #count = 0
-for i in range(2 ** 8):    
-    s = bin8(i)
-    temp = []    
-    for j in range(6):
-        temp.append(s[j:j+3])
-    t = s[6:8] + s[0]
-    temp.append(t)
-    t = s[7] + s[0:2]
-    temp.append(t)  
-    temp.sort()
-    
-    if dic == temp:
-        #count +=1
-        print s
+#for i in range(2 ** 8):    
+'''s = bin8(i)
+temp = []    
+for j in range(8):
+    temp.append(s[j:j+3])
+t = s[6:8] + s[0]
+temp.append(t)
+t = s[7] + s[0:2]
+temp.append(t)
+print temp  
+temp.sort()
+
+if dic == temp:
+    #count +=1
+    print 'Yes'
+else:
+    print 'No'
 #print count'''
+
+AdjList = {1: [2,3,5], 2: [1,4], 3: [2,5], 4: [1,2,5], 5: [3,4]}    
+nodes = {}
+for key in AdjList:
+    for value in AdjList[key]:
+        if value in nodes:
+            nodes[value] += 1
+        else:
+            nodes[value] = 1
+        if key in nodes:
+            nodes[key] -= 1
+        else:
+            nodes[key] = -1
+print nodes

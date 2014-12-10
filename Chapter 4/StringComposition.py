@@ -73,3 +73,12 @@ def DeBruijnFromPatterns(Patterns):
     result.sort()'''
     return graph    
     
+def PairedComposition(k, d, Text):
+    '''Break Text to (k, d) pairs. Sort alphabetically'''
+    result = []
+    for i in range(len(Text)-2*k-d+1):
+        result.append([Text[i:i+k], Text[i+k+d:i+2*k+d]])
+    result.sort()
+    
+    return result
+    

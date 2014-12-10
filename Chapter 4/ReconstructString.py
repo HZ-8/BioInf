@@ -88,7 +88,7 @@ def EulerianPath(AdjList):
     return eu_path
     
 def StringReconstruction(Patterns):
-    '''Given an integer k and a list of k-mers Patterns,
+    '''Given a list of k-mers Patterns,
     reconstruct the genome (one of possible)'''
     
     AdjList = DeBruijnFromPatterns(Patterns)
