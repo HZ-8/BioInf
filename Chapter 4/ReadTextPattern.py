@@ -4,7 +4,8 @@ def ReadTextPattern (filename):
     '''k = f.readline().strip()
     Text = f.readline().strip()'''
     
-    k, d = f.readline().strip().split()
+    line = f.readline().strip()
+    k, d = line.split()
     '''array = {}
     for line in f:
         line_el = line.strip().split()

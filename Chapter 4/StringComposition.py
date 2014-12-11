@@ -82,11 +82,10 @@ def PairedComposition(k, d, Text):
     
     return result
 
-def StringSpelledByPairs(Patterns, d):
+def StringSpelledByPairs(Patterns, k, d):
     '''Given a collection of (k, d) pairs, recunstruct a string that
     they were decomposed from, if one exists'''
     
-    k = len(Patterns[0][0])
     first_pat = []
     second_pat = []
     for i in range(len(Patterns)):
@@ -114,8 +113,4 @@ def DeBruijnFromPatternsPairs(Patterns):
         else:
             graph[pref] = [suff]
     
-    '''result = []
-    for el in graph:
-        result.append([el, graph[el]])
-    result.sort()'''
     return graph    
