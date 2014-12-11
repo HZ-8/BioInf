@@ -1,16 +1,17 @@
-#import ReadTextPattern, WriteArrayToFile, ReconstructString
+import ReadTextPattern, WriteArrayToFile, StringComposition, ReconstructString
 
-#Patterns = ReadTextPattern.ReadTextPattern('Test_data.txt')
-#k = int(k)
+k, d, Patterns = ReadTextPattern.ReadTextPattern('Test_data.txt')
+k = int(k)
+d = int(d)
 #k = 8
-#path = ReconstructString.KUniversalCircularString(k)
+path = StringComposition.StringSpelledByPairs(Patterns, d)
 #path = ReconstructString.StringReconstruction(Patterns)
 
 '''sorted_graph = {}
 keys2 = graph.keys()
 keys2.sort()
 for el in keys2: sorted_graph[el] = graph[el]'''
-#print path
+print path
 #WriteArrayToFile.WriteArrayToFile(path)
 
 '''bin3 = lambda x : ''.join(reversed( [str((x >> i) & 1) for i in range(3)]))
@@ -42,7 +43,7 @@ if dic == temp:
     print 'Yes'
 else:
     print 'No'
-#print count'''
+#print count
 
 AdjList = {1: [2,3,5], 2: [1,4], 3: [2,5], 4: [1,2,5], 5: [3,4]}    
 nodes = {}
@@ -56,4 +57,4 @@ for key in AdjList:
             nodes[key] -= 1
         else:
             nodes[key] = -1
-print nodes
+print nodes'''

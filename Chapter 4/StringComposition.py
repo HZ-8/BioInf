@@ -81,4 +81,41 @@ def PairedComposition(k, d, Text):
     result.sort()
     
     return result
+
+def StringSpelledByPairs(Patterns, d):
+    '''Given a collection of (k, d) pairs, recunstruct a string that
+    they were decomposed from, if one exists'''
     
+    k = len(Patterns[0][0])
+    first_pat = []
+    second_pat = []
+    for i in range(len(Patterns)):
+        first_pat.append(Patterns[i][0])
+        second_pat.append(Patterns[i][1])
+    
+    pref = StringSpell(first_pat)
+    suff = StringSpell(second_pat)
+    
+    for i in range(k+d, len(pref)):
+        if pref[i] <> suff[i-k-d]:
+            return "there is no string spelled by the gapped patterns"
+    result = pref + suff[-k-d:]
+    return result
+    
+def DeBruijnFromPatternsPairs(Patterns):
+    '''Glue repeated overlapping nodes of the adjacency graph'''
+    graph = {}
+    
+    for pat in Patterns:
+        pref = pat[0][:-1] + pat[1][:-1]
+        suff = pat[0][1:] + pat[1][1:]
+        if pref in graph:
+            graph[pref].append(suff)
+        else:
+            graph[pref] = [suff]
+    
+    '''result = []
+    for el in graph:
+        result.append([el, graph[el]])
+    result.sort()'''
+    return graph    
