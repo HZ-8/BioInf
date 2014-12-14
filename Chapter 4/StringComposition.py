@@ -114,3 +114,66 @@ def DeBruijnFromPatternsPairs(Patterns):
             graph[pref] = [suff]
     
     return graph    
+
+def InOutCounts(AdjList):
+    '''In adjacency graph, count for each node in and out edjes'''
+    counts = {}
+    for key in AdjList:
+        for value in AdjList[key]:
+            if value in counts:
+                counts[value][0] += 1
+            else:
+                counts[value] = [1, 0]
+            if key in counts:
+                counts[key][1] += 1
+            else:
+                counts[key] = [0, 1]
+    return counts
+
+def NonBranchingPaths(AdjList):
+    '''From AdjList return al ist of all non-branching paths and 
+    isolated cycles'''
+    paths = []    
+    remaining_list = {}
+    for key in AdjList:
+        key1 = key * 1
+        remaining_list[key1] = AdjList[key] * 1
+        
+    counts = InOutCounts(AdjList)
+    
+    for key in AdjList:
+        if counts[key][0] <> 1 and counts[key][1] > 0:
+            for node in AdjList[key]:
+                path = [key, node]
+
+                remaining_list[key].remove(node)
+                if remaining_list[key] == []:
+                    del remaining_list[key]
+                
+                while counts[node] == [1,1]:
+                    new_node = AdjList[node][0]
+                    path.append(new_node)
+                   
+                    remaining_list[node].remove(new_node)
+                    if remaining_list[node] == []:
+                        del remaining_list[node]
+                       
+                    node = new_node * 1
+                paths.append(path)
+        
+    while remaining_list <> {}:
+        node = remaining_list.keys()[0]
+        path = [node]
+        
+        while node in remaining_list:
+            new_node = remaining_list[node][0]           
+            path.append(new_node)
+            
+            remaining_list[node].remove(new_node)
+            if remaining_list[node] == []:
+                del remaining_list[node]
+
+            node = new_node * 1
+        paths.append(path)
+
+    return paths
