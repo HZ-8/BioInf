@@ -1,7 +1,7 @@
 def ReadTextPattern (filename):
     f = open(filename, 'r')
     #Read data for Manhattan task
-    line = f.readline().strip()
+    '''line = f.readline().strip()
     n, m = line.split()
     
     array = []
@@ -13,7 +13,12 @@ def ReadTextPattern (filename):
             row = line.strip().split()
             row = map(int, row)
             array.append(row)
+    return n, m, array1, array'''
+    
+    #Read for LSC
+    v = f.readline().strip()
+    w = f.readline().strip()
 
     f.close()    
     
-    return n, m, array1, array
+    return v, w

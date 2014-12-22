@@ -4,14 +4,17 @@ def LCSBackTrack(v, w):
     n = len(v)
     m = len(w)
     nodes = []
-    Backtrack = []
     for i in range (n+1):
         row = []
-        backrow = []
         for j in range(m+1):
             row.append(0)
-            backrow.append('none')
         nodes.append(row)
+
+    Backtrack = []        
+    for i in range (n):
+        backrow = []
+        for j in range(m):
+            backrow.append('')
         Backtrack.append(backrow)
         
     for i in range(1, n+1):
@@ -24,11 +27,11 @@ def LCSBackTrack(v, w):
             nodes[i][j] = max(vert_path, hor_path, diag_path)
             
             if nodes[i][j] == nodes[i-1][j]:
-               Backtrack[i][j] = 'Vert'
+               Backtrack[i-1][j-1] = 'V'
             if nodes[i][j] == nodes[i][j-1]:
-               Backtrack[i][j] = 'Right'   
+               Backtrack[i-1][j-1] = 'R'   
             if (nodes[i][j] == nodes[i-1][j-1] + 1) and (v[i-1] == w[j-1]):
-               Backtrack[i][j] = 'Diag'      
+               Backtrack[i-1][j-1] = 'D'      
     
     return Backtrack
 
@@ -36,12 +39,12 @@ def OutputLCS(Backtrack, v, i, j):
     '''Solve the Longest Common Subsequence Problem by using the information
     in Backtrack. OUTPUTLCS(Backtrack, v, i, j) outputs an LCS between the
     i-prefix of v and the j-prefix of w '''
-    if (i == 0) or (j == 0):
+    if (i == -1) or (j == -1):
         return ''
     
-    if Backtrack[i][j] == 'Vert':
-        return OutputLCS(Backtrack, v, i-1, j) + v[i]      
-    elif Backtrack[i][j] == 'Right':
-        return OutputLCS(Backtrack, v, i, j-1) + v[i]
+    if Backtrack[i][j] == 'V':
+        return OutputLCS(Backtrack, v, i-1, j)     
+    elif Backtrack[i][j] == 'R':
+        return OutputLCS(Backtrack, v, i, j-1)
     else:
         return OutputLCS(Backtrack, v, i-1, j-1) + v[i]
