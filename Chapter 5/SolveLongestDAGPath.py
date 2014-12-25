@@ -31,7 +31,7 @@ def PathWeight(start_node, graph):
 
 def GetPath(path_graph, start_node, end_node):
     '''Having a graph with all nodes and path length-origin for each of them, 
-    get the way from enf to start node'''
+    get the way from end to start node'''
     
     path = [end_node]
     node = end_node
