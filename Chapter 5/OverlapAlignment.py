@@ -1,4 +1,4 @@
-def FittingAlignment(v, w, sigma):
+def OverlapAlignment(v, w, sigma):
     
     n = len(v)
     m = len(w)
@@ -28,7 +28,7 @@ def FittingAlignment(v, w, sigma):
             if v[i-1] == w[j-1]:
                 diag_path += 1
             else:
-                diag_path -= 1
+                diag_path -= sigma
             
             nodes[i][j] = max(vert_path, hor_path, diag_path)
             
@@ -39,42 +39,33 @@ def FittingAlignment(v, w, sigma):
             if nodes[i][j] == diag_path:
                Backtrack[i-1][j-1] = 'D'
     
-    max_score = nodes[0][m]
-    sink = [0, m]
-    for i in range (1, n+1):
-        if nodes [i][m] > max_score:
-            max_score = nodes [i][m]
-            sink = [i, m]
+    max_score = nodes[n][0]
+    sink = [n, 0]
+    for i in range (1, m+1):
+        if nodes [n][i] > max_score:
+            max_score = nodes [n][i]
+            sink = [n, i]
     
     return max_score, sink, Backtrack
     
-def FittingPath(Backtrack, v, i, j, position):
+def OverlapPath(Backtrack, v, i, j, position):
     '''Return fitting alignment of v and w'''
-    if (i >= 0) and (j == -1):
-        if position == 1:
-            return v[:i+1]
-        else:
-            return '-' * (i+1)
-    elif (i == -1) and (j >= 0):
-        if position == 1:
-            return '-' * (j+1)
-        else:
-            return v[:j+1]
-    elif (i == -1) and (j == -1):
+
+    if (j == -1):
         return ''
     
     if Backtrack[i][j] == 'V':
         if position == 1:
-            return FittingPath(Backtrack, v, i-1, j, position) + v[i]
+            return OverlapPath(Backtrack, v, i-1, j, position) + v[i]
         else:
-            return FittingPath(Backtrack, v, i-1, j, position) + '-'
+            return OverlapPath(Backtrack, v, i-1, j, position) + '-'
     elif Backtrack[i][j] == 'R':
         if position == 1:
-            return FittingPath(Backtrack, v, i, j-1, position) + '-'
+            return OverlapPath(Backtrack, v, i, j-1, position) + '-'
         else:
-            return FittingPath(Backtrack, v, i, j-1, position) + v[j]
+            return OverlapPath(Backtrack, v, i, j-1, position) + v[j]
     elif Backtrack[i][j] == 'D':
         if position == 1:
-            return FittingPath(Backtrack, v, i-1, j-1, position) + v[i]
+            return OverlapPath(Backtrack, v, i-1, j-1, position) + v[i]
         else:
-            return FittingPath(Backtrack, v, i-1, j-1, position) + v[j]
+            return OverlapPath(Backtrack, v, i-1, j-1, position) + v[j]
