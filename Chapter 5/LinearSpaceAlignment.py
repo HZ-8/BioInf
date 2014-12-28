@@ -1,33 +1,47 @@
+def HalfPath(v, w, Score, sigma):
+    n = len(v)
+    m = len(w)
+    path = []
+    for i in range (n+1):
+        row = []
+        for j in range(m+1):
+            row.append(0)
+            
+        path.append(row)
+    
+    for i in range (n):
+        path[i+1][0] = path[i][0] - sigma
+    for j in range (m):
+        path[0][j+1] = path[0][j] - sigma   
+    
+    for i in range(1, n+1):
+        for j in range(1, m+1):
+            vert_path = path[i-1][j] - sigma
+            hor_path = path[i][j-1] - sigma
+            diag_path = path[i-1][j-1] + Score[v[i-1]][w[j-1]]
+            path[i][j] = max(vert_path, hor_path, diag_path)
+    return path
+
 def MiddleEdge(v, w, Score, sigma):
     n = len(v)
     m = len(w)
     m_mid = m / 2
+    w1 = w[:m_mid+1]
+    from_s = HalfPath(v, w1, Score, sigma)
     
-    nodes = []
-    for i in range (n+1):
-        row = []
-        for j in range(m_mid+1):
-            row.append(0)
-            
-        nodes.append(row)
+    v_rev = v[::-1]
+    w_rev = w[m_mid+1:][::-1]
+    to_s = HalfPath(v_rev, w_rev, Score, sigma)    
     
-    for i in range (n):
-        nodes[i+1][0] = nodes[i][0] - sigma
-    for j in range (m_mid):
-        nodes[0][j+1] = nodes[0][j] - sigma   
-
-    for i in range(1, n+1):
-        for j in range(1, m_mid+1):
-            vert_path = nodes[i-1][j] - sigma
-            hor_path = nodes[i][j-1] - sigma
-            diag_path = nodes[i-1][j-1] + Score[v[i-1]][w[j-1]]
-            nodes[i][j] = max(vert_path, hor_path, diag_path)
-            
+    mid_score = []
+    for i in range(n+1):
+        mid_score.append(from_s[i][m_mid] + to_s[n+1-i][m-m_mid])
+        
     edge_start = (0, m_mid)
-    max_path = nodes[0][m_mid]
+    max_path = mid_score[0][m_mid]
     for i in range(1, n+1):
-        if nodes[i][m_mid] > max_path:
-            max_path = nodes[i][m_mid]
+        if mid_score[i][m_mid] > max_path:
+            max_path = mid_score[i][m_mid]
             edge_start = (i, m_mid)
     
     hor_path = - sigma
