@@ -1,18 +1,22 @@
-import LinearSpaceAlignment, ReadTextPattern #, WriteArrayToFile
+import LinearSpaceAlignment, ReadTextPattern, WriteArrayToFile
 
 Score = ReadTextPattern.ReadScoreMatrix('BLOSUM62 Score Matrix.txt')
 sigma = 5
 
-v, w = ReadTextPattern.ReadTextPattern('Test data.txt')
+v, w = ReadTextPattern.ReadTextPattern('dataset_250_14.txt')
+
 n = len(v)
 m = len(w)
+
+#res = LinearSpaceAlignment.MiddleEdge(v, w, Score, sigma)
+#print res
 res = LinearSpaceAlignment.LinearSpaceAlignment(v, w, Score, sigma)
-print res
+#print res
 
 p1, p2 = LinearSpaceAlignment.GetPath(v, w, res)
 
-print p1
-print p2
+#print p1
+#print p2
 
 score = 0
 for i in range(len(p1)):
@@ -25,4 +29,4 @@ print score
 
 #print path1
 #print path2
-#WriteArrayToFile.WriteArrayToFile([path1, path2])
+WriteArrayToFile.WriteArrayToFile([p1, p2])
