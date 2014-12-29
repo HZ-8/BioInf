@@ -1,4 +1,45 @@
-def LCSBackTrack(v1, v2, v3):
+def InitBacktrack(n, m, l):
+    Backtrack = []        
+    for i in range (n+1):
+        table = []
+        for j in range(m+1):
+            row = []
+            for k in range(l+1):
+                row.append([])
+            table.append(row)
+        Backtrack.append(table)
+    
+    Backtrack[0][0][0] = [-1, -1, -1]
+    i = 0
+    for j in range(1, m+1):
+        Backtrack[i][j][0] = [i, j-1, 0]
+    for k in range(1, l+1):
+        Backtrack[i][0][k] = [i, 0, k-1]
+    for j in range(1, m+1):
+        for k in range(1, l+1):
+            Backtrack[i][j][k] = [i, j-1, k-1]
+            
+    j = 0
+    for i in range(1, n+1):
+        Backtrack[i][j][0] = [i-1, j, 0]
+    for k in range(1, l+1):
+        Backtrack[0][j][k] = [0, j, k-1]
+    for i in range(1, n+1):
+        for k in range(1, l+1):
+            Backtrack[i][j][k] = [i-1, j, k-1]
+
+    k = 0
+    for i in range(1, n+1):
+        Backtrack[i][0][k] = [i-1, 0, k]
+    for j in range(1, m+1):
+        Backtrack[0][j][k] = [0, j-1, k]
+    for i in range(1, n+1):
+        for j in range(1, m+1):
+            Backtrack[i][j][k] = [i-1, j-1, k]
+    
+    return Backtrack
+
+def MultipleAlignment(v1, v2, v3):
     '''For 3 strings, reconstruct its alignment graph and 
     find the graph to move from the end to start edge'''
     n = len(v1)
@@ -14,15 +55,7 @@ def LCSBackTrack(v1, v2, v3):
             table.append(row)
         nodes.append(table)
 
-    Backtrack = []        
-    for i in range (n+1):
-        table = []
-        for j in range(m+1):
-            row = []
-            for k in range(l+1):
-                row.append([0, 0, 0])
-            table.append(row)
-        Backtrack.append(table)
+    Backtrack = InitBacktrack(n, m, l)
         
     for i in range(1, n+1):
         for j in range(1, m+1):
@@ -40,28 +73,37 @@ def LCSBackTrack(v1, v2, v3):
                                     score +=1
                             if score > max_score:
                                 max_score = score * 1
-                                from_node = [i1, i2,  i3]
+                                from_node = [i1, i2, i3]
 
                 nodes[i][j][k] = max_score
                 Backtrack[i][j][k] = from_node
     
     return nodes[n][m][l], Backtrack
 
-def OutputLCS(Backtrack, v1, v2, v3, i, j):
+def OutputLCS(Backtrack, v1, v2, v3):
     '''Solve the Longest Common Subsequence Problem by using the information
     in Backtrack. '''
     n = len(v1)
     m = len(v2)
     l = len(v3)
-    p1 = '' #v1[len(v1)-1]
-    p2 = '' #v2[len(v2)-1]
-    p3 = '' #v3[len(v3)-1]
-    
-    path = [n-1, m-1, l-1]
-    from_node = Backtrack[n-1][m-1][l-1]
 
-    while from_node <> [0,0,0]:
-        path = Backtrack[from_node] + path
-        from_node = Backtrack[from_node]
+    path = [[n, m, l]]
+    print 'path', path
+    from_node = Backtrack[n][m][l]
+    print 'from node', from_node
+
+    while from_node <> [0, 0, 0]:
+        path = [from_node] + path
+        print 'path', path
+        from_node = Backtrack[from_node[0]][from_node[1]][from_node[2]]
+        print 'from node', from_node
+    path = [from_node] + path    
     
+    '''start_node = path[0]
+    p1 = '-' * start_node[0]
+    p2 = '-' * start_node[1]
+    p3 = '-' * start_node[2]'''
+    
+    return path
+        
     
