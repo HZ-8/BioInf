@@ -40,10 +40,11 @@ def ReadTextPattern (filename):
     #Read data for Global Alignment
     v = f.readline().strip()
     w = f.readline().strip()
+    y = f.readline().strip()
 
     f.close()    
     
-    return v, w
+    return v, w, y
 
 def ReadScoreMatrix (filename):
     f = open(filename, 'r')

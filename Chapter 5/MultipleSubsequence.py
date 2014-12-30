@@ -88,22 +88,35 @@ def OutputLCS(Backtrack, v1, v2, v3):
     l = len(v3)
 
     path = [[n, m, l]]
-    print 'path', path
     from_node = Backtrack[n][m][l]
-    print 'from node', from_node
 
-    while from_node <> [0, 0, 0]:
+    while from_node <> [-1, -1, -1]:
         path = [from_node] + path
-        print 'path', path
         from_node = Backtrack[from_node[0]][from_node[1]][from_node[2]]
-        print 'from node', from_node
-    path = [from_node] + path    
     
-    '''start_node = path[0]
-    p1 = '-' * start_node[0]
-    p2 = '-' * start_node[1]
-    p3 = '-' * start_node[2]'''
-    
-    return path
+    p1, p2, p3 = '', '', ''
+    i, j, k = 0, 0, 0
+    for s in range(1, len(path)):
+        prev_node = path[s-1]
+        curr_node = path[s]
+
+        if prev_node[0] == curr_node[0]:
+            p1 += '-'
+        else:
+            p1 += v1[i]
+            i += 1
+
+        if prev_node[1] == curr_node[1]:
+            p2 += '-'
+        else:
+            p2 += v2[j]
+            j += 1        
+        
+        if prev_node[2] == curr_node[2]:
+            p3 += '-'
+        else:
+            p3 += v3[k]
+            k += 1        
+    return p1, p2, p3
         
     
